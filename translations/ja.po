@@ -88,9 +88,9 @@ msgid ""
 msgstr ""
 "出力数が多いため、上記は後半を省略していますが、完全な一覧は  :ref:`full "
 "list here <package-list>` で確認できます。パッケージ名のアルファベット順に並"
-"べられています。ワイルドカードの ``*`` と ``?`` なしでの一致は、始めと終わり"
-"に ``*`` を付けた場合と同じ扱いになります。つまり、 ``util`` は、 ``*util*`` "
-"と同等です。"
+"べられています。ワイルドカード文字として ``*`` と ``?`` が利用可能であり、"
+"パターンにワイルドカードが含まれない場合は先頭と末尾に ``*`` を付けた場合と"
+"同じ扱いになります。つまり、 ``util`` は、 ``*util*`` と同等です。"
 
 # 5c07944fff914fa396d86cc18b189c19
 #: ../spack/lib/spack/docs/basic_usage.rst:57
@@ -124,9 +124,9 @@ msgid ""
 "versions that Spack knows the checksum for, and it will use the checksum to "
 "verify that these versions download without errors or viruses."
 msgstr ""
-"多くの情報は一目瞭然でしょう。 *安全なバージョン(safe versions)* はSpackが"
-"checksumを認識しているバージョンであり、これらのバージョンがエラーやウィルス"
-"なしでダンロード可能なことを確認できます。"
+"多くの情報は一目瞭然でしょう。 *Safe versions* はSpackがチェックサムを記録して"
+"いるバージョンのことで、これらのバージョンをダウンロードする際にはチェックサム"
+"を用いてエラーやウィルスの混入がないか検証されます。"
 
 # f0c9c281fc174a329cde8a267e924caa
 #: ../spack/lib/spack/docs/basic_usage.rst:81
@@ -148,6 +148,8 @@ msgid ""
 "To see *more* available versions of a package, run ``spack versions``. For "
 "example:"
 msgstr ""
+"もっと *たくさんの* 利用可能なバージョンを見る場合は ``spack versions`` を"
+"実行します。"
 
 # 3f6f9b4c30624e9a82606638db55edbe
 #: ../spack/lib/spack/docs/basic_usage.rst:95
@@ -156,6 +158,9 @@ msgid ""
 "which Spack has a checksum on file.  It can verify that these versions are "
 "downloaded correctly."
 msgstr ""
+"出力には二つのセクションがあります。 *Safe versions* はSpackがチェックサムを"
+"記録しているバージョンです。Spackはこれらのバージョンが正しくダウンロードさ"
+"れたかを検証することができます。"
 
 # 677dcec0688f4f59ae165a66adddba8d
 #: ../spack/lib/spack/docs/basic_usage.rst:99
@@ -166,11 +171,16 @@ msgid ""
 "how its releases are organized, Spack may or may not be able to find remote "
 "versions."
 msgstr ""
+"また、web上にどんなバージョンがあるのかを多くの場合Spackが表示できます。"
+"これらのバージョンは *remote versions* と呼ばれ、直接パッケージのwebページにア"
+"クセスしてスクレイピングにより取得した情報から生成されます。パッケージや、"
+"またパッケージのリリース一覧がどういう構成になっているかによって、"
+"remote versionを見つけられることもあれば見つけられないこともあります。"
 
 # 74d771d64b65435cb3a0413fcf2e4a9e
 #: ../spack/lib/spack/docs/basic_usage.rst:107
 msgid "Installing and uninstalling"
-msgstr ""
+msgstr "パッケージのインストールとアンインストール"
 
 # 98d8b03fd9f34cd0b15918635cc0e6e5
 #: ../spack/lib/spack/docs/basic_usage.rst:113
@@ -184,6 +194,9 @@ msgid ""
 "example, To install the latest version of the ``mpileaks`` package, you "
 "might type this:"
 msgstr ""
+"`spack install` によって ``spack list`` に出力される全てのパッケージをインス"
+"トールできます。たとえば、以下を入力すれば ``mpileaks`` パッケージの最新版が"
+"インストールされます"
 
 # a732ed5e6d3541ea8baeced26c14df3e
 #: ../spack/lib/spack/docs/basic_usage.rst:123
@@ -195,17 +208,24 @@ msgid ""
 "messages from spack, a lot of build output, and a message that the packages "
 "is installed:"
 msgstr ""
+"``mpileaks`` が他のパッケージに依存している場合、Spackは最初に依存パッケージを"
+"インストールします。それから ``mpileaks`` のtarballをダウンロードし、展開し、"
+"正しくダウンロードされたか検証し、ビルドし、そして ``$SPACK_ROOT/opt`` 以下の"
+"新しいディレクトリにインストールします。Spackがメッセージを出力した後に大量の"
+"ビルド出力が流れ、そしてパッケージがインストールされたことを告げるメッセージが"
+"出てきます。"
 
 # dbf66b9da07b4ee4a119b404f9ccea81
 #: ../spack/lib/spack/docs/basic_usage.rst:150
 msgid ""
 "The last line, with the ``[+]``, indicates where the package is installed."
 msgstr ""
+"最終行の ``[+]`` は、パッケージがイントールされていることを表します。"
 
 # ccbd4b7631b845188e7d05aaa5a3af71
 #: ../spack/lib/spack/docs/basic_usage.rst:155
 msgid "Building a specific version"
-msgstr ""
+msgstr "特定のバージョンをビルドする"
 
 # ad8e8a56fab34127b1505fea143387e0
 #: ../spack/lib/spack/docs/basic_usage.rst:157
@@ -213,6 +233,8 @@ msgid ""
 "Spack can also build *specific versions* of a package.  To do this, just add "
 "``@`` after the package name, followed by a version:"
 msgstr ""
+"Spackではパッケージの *特定のバージョン* をビルドすることもできます。やり方"
+"は、 ``@`` をパッケージ名の後に付けて、その後にバージョンを付けるだけです："
 
 # 04cd2ecf70844a7ca040b2cef889cbed
 #: ../spack/lib/spack/docs/basic_usage.rst:164
@@ -222,6 +244,10 @@ msgid ""
 "installing a version that one user needs will not disrupt existing "
 "installations for other users."
 msgstr ""
+"同じ名前で違うバージョンのパッケージを、いくつでも同時に、相互に干渉させること"
+"なくインストールできます。これはマルチユーザーのサイトで有益です。あるユーザー"
+"が自分の必要とするバージョンをインストールしても、他のユーザーのインストールを"
+"壊すことはありません。"
 
 # d1d15d5a1ea0451ca00b9973e58bc61d
 #: ../spack/lib/spack/docs/basic_usage.rst:169
@@ -233,6 +259,12 @@ msgid ""
 "the same version of a package, one built with boost 1.39.0, and the other "
 "version built with version 1.43.0, can coexist."
 msgstr ""
+"バージョンの切り替えだけでなく、Spackではインストールに用いるコンパイラ、コン"
+"パイル時設定、コンパイラフラグ、および（クロスコンパイル時の）プラットフォーム"
+"をカスタマイズすることもできます。Spackにはパッケージがビルドされる際の "
+"*依存* を管理する独特な機能もあります。たとえば、二つの同じバージョンのパッ"
+"ケージを、それぞれboost 1.39.0とboost 1.43.0を用いてビルドするように設定して共"
+"存させることができます。"
 
 # a2e4fd8a01ce4ce48bf33b54ce995587
 #: ../spack/lib/spack/docs/basic_usage.rst:176
@@ -243,6 +275,11 @@ msgid ""
 "both valid *specs*.  We'll talk more about how you can use them to customize "
 "an installation in :ref:`sec-specs`."
 msgstr ""
+"こういった設定は全て *spec* 構文を用いてコマンドラインで行えます。Spackでは、"
+"あるパッケージの設定を規定するディスクリプタを **spec** と呼びます。上のコマ"
+"ンド中にあった ``mpileaks`` や ``mpileaks@3.0.4`` はいずれも正しい *spec* "
+"です。インストールをカスタマイズするためにSpecをどう用いるのかは "
+":ref:`sec-specs` でより詳しく述べます。"
 
 # abe8cdcbf45840adbfad98aaeb8d7faa
 #: ../spack/lib/spack/docs/basic_usage.rst:186
@@ -256,6 +293,9 @@ msgid ""
 "the user for confirmation before completely removing the directory in which "
 "the package was installed."
 msgstr ""
+"パッケージをアンインストールするには ``spack uninstall <package>`` を入力し"
+"ます。パッケージのインストールされたディレクトリが完全に削除される前に、"
+"ユーザーへの確認が行われます。"
 
 # 34c60b1db53b4c63b0543dddc6cbcc36
 #: ../spack/lib/spack/docs/basic_usage.rst:196
@@ -263,6 +303,8 @@ msgid ""
 "If there are still installed packages that depend on the package to be "
 "uninstalled, spack will refuse to uninstall it."
 msgstr ""
+"アンインストールしようとしているパッケージに依存しているパッケージがまだ"
+"インストールされているなら、spackはアンインストールを拒否します。"
 
 # 4dce6e03bfd045058f13704d5fb0d64a
 #: ../spack/lib/spack/docs/basic_usage.rst:199
@@ -270,6 +312,8 @@ msgid ""
 "To uninstall a package and every package that depends on it, you may give "
 "the ``--dependents`` option."
 msgstr ""
+"あるパッケージとそのパッケージに依存する全てのパッケージを削除するためには、 "
+"``--dependents`` オプションを渡すことができます。"
 
 # 4cd099408c9b4651bece9ce694e9d3c8
 #: ../spack/lib/spack/docs/basic_usage.rst:206
@@ -277,11 +321,13 @@ msgid ""
 "will display a list of all the packages that depend on ``mpich`` and, upon "
 "confirmation, will uninstall them in the right order."
 msgstr ""
+"``mpich`` に依存するパッケージの一覧が表示され、確認の後に、全てのパッケージが"
+"正しい順序で削除されます。"
 
 # d7fea51604f543dd8cf435073a387272
 #: ../spack/lib/spack/docs/basic_usage.rst:209
 msgid "A command like"
-msgstr ""
+msgstr "以下のようなコマンドは曖昧である場合があります。"
 
 # 0a98101d8e904859986cec09e704ffba
 #: ../spack/lib/spack/docs/basic_usage.rst:215
@@ -293,11 +339,18 @@ msgid ""
 "the ambiguity or use the ``--all`` option to uninstall all of the matching "
 "packages."
 msgstr ""
+"複数の ``mpich`` が違う設定でインストールされていることがあるからです。たとえ"
+"ば、もし ``mpich@3.0.2`` と ``mpich@3.1`` の両方がインストールされていれば、 "
+"``mpich`` はどちらを指している可能性もあります。どちらをアンインストールすべき"
+"か決定できないので、Spackはユーザーに対してバージョン番号を入力してどちらを"
+"アンインストールするか指定するか、もしくは ``--all`` オプションを使用して"
+"マッチする全てのパッケージをアンインストールするかを要求します。"
+
 
 # b937bd8736a14fc4af6bed52f2b7194b
 #: ../spack/lib/spack/docs/basic_usage.rst:222
 msgid "You may force uninstall a package with the ``--force`` option"
-msgstr ""
+msgstr "``--force`` オプションでパッケージを強制的にアンインストールすることもできます。"
 
 # 9583051f3cd04b91ae366666456590cd
 #: ../spack/lib/spack/docs/basic_usage.rst:228
@@ -306,6 +359,9 @@ msgid ""
 "remove dependent packages *before* removing their dependencies or use the "
 "``--dependents`` option."
 msgstr ""
+"しかし他のインストール済みのパッケージを壊す危険があります。原則として、依存"
+"されているパッケージを依存先のパッケージよりも *先に* アンインストールするか、"
+"もしくは ``--dependents`` オプションを使うほうがより安全です。"
 
 # 8dfd4fea7b2046c09fc839a9ad70a772
 #: ../spack/lib/spack/docs/basic_usage.rst:237
